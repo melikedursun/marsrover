@@ -14,21 +14,22 @@ namespace MarsRover.Core
         {
             _plateau = plateau;
             _roverPosition = roverPosition.ValidateCoordinate(plateau);
+            _roverPosition.Rover = this;
         }
 
         public void Move()
         {
-            _roverPosition._direction.Move(this);
+            _roverPosition.Move();
         }
 
         public void TurnLeft()
         {
-            _roverPosition._direction = _roverPosition._direction.TurnLeft();
+            _roverPosition.TurnLeft();
         }
 
         public void TurnRight()
         {
-            _roverPosition._direction = _roverPosition._direction.TurnRight();
+            _roverPosition.TurnRight();
         }
 
         public string GetCurrentLocation()

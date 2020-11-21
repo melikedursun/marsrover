@@ -6,7 +6,7 @@ namespace MarsRover.DirectionOperation
     {
         Direction DirectionName();
         void Move(IRover rover);
-        IDirection TurnLeft();
-        IDirection TurnRight();
+        void TurnLeft();
+        void TurnRight();
     }
 }

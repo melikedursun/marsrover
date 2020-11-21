@@ -4,6 +4,13 @@ namespace MarsRover.DirectionOperation
 {
     public class WestDirection : IDirection
     {
+        private IRover rover;
+
+        public WestDirection(IRover rover)
+        {
+            this.rover = rover;
+        }
+
         public Direction DirectionName()
         {
             return Direction.W;
@@ -17,14 +24,14 @@ namespace MarsRover.DirectionOperation
             }
         }
 
-        public IDirection TurnLeft()
+        public void TurnLeft()
         {
-            return new SouthDirection();
+            rover.GetRoverPosition()._direction = new SouthDirection(rover);
         }
 
-        public IDirection TurnRight()
+        public void TurnRight()
         {
-            return new NorthDirection();
+            rover.GetRoverPosition()._direction = new NorthDirection(rover);
         }
     }
 }

@@ -1,17 +1,18 @@
-﻿using MarsRover.DirectionOperation;
+﻿using MarsRover.Core;
+using MarsRover.DirectionOperation;
 
 namespace MarsRoverProject.Helper
 {
     public static class DirectionHelper
     {
-        public static IDirection GetDirection(Direction direction)
+        public static IDirection GetDirection(IRover rover, Direction direction)
         {
             return direction switch
             {
-                Direction.N => new NorthDirection(),
-                Direction.S => new SouthDirection(),
-                Direction.E => new EastDirection(),
-                Direction.W => new WestDirection(),
+                Direction.N => new NorthDirection(rover),
+                Direction.S => new SouthDirection(rover),
+                Direction.E => new EastDirection(rover),
+                Direction.W => new WestDirection(rover),
                 _ => null,
             };
         }

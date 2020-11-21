@@ -1,4 +1,5 @@
-﻿using MarsRover.DirectionOperation;
+﻿using MarsRover.Core;
+using MarsRover.DirectionOperation;
 using MarsRoverProject.ExceptionHandler;
 using MarsRoverProject.Helper;
 
@@ -9,12 +10,24 @@ namespace MarsRover.Entity
         public int X { get; set; }
         public int Y { get; set; }
         public IDirection _direction { get; set; }
+        private IRover _rover { get; set; }
+        private readonly Direction directionValue;
+
+        public IRover Rover
+        {
+            get { return _rover; }
+            set
+            {
+                _rover = value;
+                _direction = DirectionHelper.GetDirection(_rover, directionValue);
+            }
+        }
 
         public RoverPosition(int xCoordinate, int yCoordinate, Direction direction)
         {
             X = xCoordinate;
             Y = yCoordinate;
-            _direction = DirectionHelper.GetDirection(direction);
+            directionValue = direction;
         }
 
         public RoverPosition ValidateCoordinate(Plateau plateau)
@@ -27,6 +40,21 @@ namespace MarsRover.Entity
             {
                 throw new RoverException("Is not valid coordinate");
             }
+        }
+
+        public void Move()
+        {
+            _direction.Move(_rover);
+        }
+
+        public void TurnLeft()
+        {
+            _direction.TurnLeft();
+        }
+
+        public void TurnRight()
+        {
+            _direction.TurnRight();
         }
     }
 }
